@@ -9,7 +9,6 @@ import {
   Button,
   Card,
   CardContent,
-  Divider,
   InputAdornment,
   Icon,
   IconButton,
@@ -60,7 +59,8 @@ function Login() {
 
         <FuseAnimate animation="transition.slideUpIn" delay={400}>
           <Typography variant="h3" color="inherit" className="font-800 leading-tight">
-            Welcome to the <br /> Growbase Admin!
+            Lista de Recados
+            <br /> Growbase Admin!
           </Typography>
         </FuseAnimate>
 
@@ -154,7 +154,7 @@ function Login() {
               </Button>
             </Formsy>
 
-            <div className="my-24 flex items-center justify-center">
+            {/* <div className="my-24 flex items-center justify-center">
               <Divider className="w-32" />
               <span className="mx-8 font-bold">OR</span>
               <Divider className="w-32" />
@@ -166,7 +166,7 @@ function Login() {
 
             <Button variant="contained" color="primary" size="small" className="w-192">
               Log in with Facebook
-            </Button>
+            </Button> */}
 
             <div className="flex flex-col items-center justify-center pt-32 pb-24">
               <span className="font-medium">Don't have an account?</span>
