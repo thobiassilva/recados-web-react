@@ -4,6 +4,11 @@ import jwtDecode from 'jwt-decode';
 /* eslint-disable camelcase */
 
 class Api extends FuseUtils.EventEmitter {
+  constructor() {
+    super();
+    this.init();
+  }
+
   init() {
     this.setBaseUrl();
     this.setInterceptors();
