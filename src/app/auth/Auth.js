@@ -65,7 +65,8 @@ class Auth extends Component {
 
       jwtService.init();
 
-      return Promise.resolve();
+      // return Promise.resolve();
+      resolve();
     });
 
   auth0Check = () =>
