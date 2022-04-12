@@ -155,7 +155,7 @@ class Api extends FuseUtils.EventEmitter {
           password,
         })
         .then((response) => {
-          if (response.data.data) {
+          if (response.data.success) {
             if (remember) {
               this.setSaveSession(response.data.data);
             } else {
@@ -171,7 +171,7 @@ class Api extends FuseUtils.EventEmitter {
               },
             });
           } else {
-            reject(response.data.error);
+            reject(response.data.message);
           }
         });
     });
@@ -185,7 +185,7 @@ class Api extends FuseUtils.EventEmitter {
           password,
         })
         .then((response) => {
-          if (response.data.data) {
+          if (response.data.success) {
             this.setSession(response.data.data);
 
             resolve({
@@ -198,7 +198,7 @@ class Api extends FuseUtils.EventEmitter {
               },
             });
           } else {
-            reject(response.data.error);
+            reject(response.data.message);
           }
         });
     });
