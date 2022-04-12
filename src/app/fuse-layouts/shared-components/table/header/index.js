@@ -40,7 +40,7 @@ function TableHeadComponent(props) {
             </TableCell>
           );
         }, this)}
-        <TableCell className="p-4 md:p-16" padding="default" sortDirection={false} />
+        <TableCell className="p-4 md:p-16" sortDirection={false} />
       </TableRow>
     </TableHead>
   );
