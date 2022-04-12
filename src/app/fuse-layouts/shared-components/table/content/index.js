@@ -38,7 +38,6 @@ export default function TableContent({ action, columns, data }) {
   function handleChangeRowsPerPage(event) {
     setRowsPerPage(event.target.value);
   }
-  console.log(data);
 
   return (
     <div className="w-full flex flex-col">
@@ -68,7 +67,7 @@ export default function TableContent({ action, columns, data }) {
               [order.direction]
             ).map((n, i) => {
               return (
-                <TableRow className="h-64" hover role="checkbox" tabIndex={-1} key={n.id}>
+                <TableRow className="h-64" hover role="checkbox" tabIndex={-1} key={n.uid}>
                   <TableCell className="p-4 md:p-16" component="th" scope="left">
                     <Typography className="font-bold" color="primary">
                       {/* {n[columns[0].id]} */}
