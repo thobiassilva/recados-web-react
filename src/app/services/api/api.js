@@ -167,6 +167,34 @@ class Api extends FuseUtils.EventEmitter {
               data: {
                 displayName: username,
                 email: username,
+                photoURL: `https://api.multiavatar.com/${username}.png`,
+              },
+            });
+          } else {
+            reject(response.data.error);
+          }
+        });
+    });
+  };
+
+  signUpWithEmailAndPassword = (username, password) => {
+    return new Promise((resolve, reject) => {
+      axios
+        .post('/register', {
+          login: username,
+          password,
+        })
+        .then((response) => {
+          if (response.data.data) {
+            this.setSession(response.data.data);
+
+            resolve({
+              uid: response.data.data,
+              role: ['admin'],
+              data: {
+                displayName: username,
+                email: username,
+                photoURL: `https://api.multiavatar.com/${username}.png`,
               },
             });
           } else {

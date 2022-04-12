@@ -15,12 +15,11 @@ import {
   Typography,
 } from '@mui/material';
 
-import { submitLogin } from 'app/auth/store/loginSlice';
-
+import { submitRegister } from 'app/auth/store/registerSlice';
 import { Root, GradientSection } from './styleds';
 
 function Login() {
-  const login = useSelector(({ auth }) => auth.login);
+  const register = useSelector(({ auth }) => auth.register);
   const dispatch = useDispatch();
 
   const [isFormValid, setIsFormValid] = useState(false);
@@ -29,13 +28,13 @@ function Login() {
   const formRef = useRef(null);
 
   useEffect(() => {
-    if (login.error && (login.error.email || login.error.password)) {
+    if (register.error && (register.error.email || register.error.password)) {
       formRef.current.updateInputsWithError({
-        ...login.error,
+        ...register.error,
       });
       disableButton();
     }
-  }, [login.error]);
+  }, [register.error]);
 
   function disableButton() {
     setIsFormValid(false);
@@ -46,7 +45,7 @@ function Login() {
   }
 
   function handleSubmit(model) {
-    dispatch(submitLogin(model));
+    dispatch(submitRegister(model));
     formRef.current.reset();
   }
 
@@ -109,28 +108,6 @@ function Login() {
                 type="password"
                 name="password"
                 label="Senha"
-                InputProps={{
-                  className: 'pr-2',
-                  type: showPassword ? 'text' : 'password',
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton onClick={() => setShowPassword(!showPassword)}>
-                        <Icon className="text-20" color="action">
-                          {showPassword ? 'visibility' : 'visibility_off'}
-                        </Icon>
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-                variant="outlined"
-                required
-              />
-
-              <TextFieldFormsy
-                className="mb-16"
-                type="password"
-                name="password"
-                label="Confirmar senha"
                 InputProps={{
                   className: 'pr-2',
                   type: showPassword ? 'text' : 'password',
