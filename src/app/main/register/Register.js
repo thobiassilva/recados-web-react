@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import FuseAnimate from '@fuse/core/FuseAnimate';
-import { TextFieldFormsy, CheckboxFormsy } from '@fuse/core/formsy';
+import { TextFieldFormsy } from '@fuse/core/formsy';
 import Formsy from 'formsy-react';
 import {
   Button,
@@ -76,7 +76,7 @@ function Login() {
         <Card className="w-full max-w-400 mx-auto m-16 md:m-0" square>
           <CardContent className="flex flex-col items-center justify-center p-32 md:p-48 md:pt-128 ">
             <Typography variant="h6" className="mb-32 font-bold text-20 sm:text-24">
-              Login to your account
+              Create your account
             </Typography>
 
             <Formsy
@@ -126,14 +126,27 @@ function Login() {
                 required
               />
 
-              <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-between">
-                <CheckboxFormsy
-                  className="my-16"
-                  name="remember"
-                  value={false}
-                  label="Remember Me"
-                />
-              </div>
+              <TextFieldFormsy
+                className="mb-16"
+                type="password"
+                name="password"
+                label="Confirmar senha"
+                InputProps={{
+                  className: 'pr-2',
+                  type: showPassword ? 'text' : 'password',
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton onClick={() => setShowPassword(!showPassword)}>
+                        <Icon className="text-20" color="action">
+                          {showPassword ? 'visibility' : 'visibility_off'}
+                        </Icon>
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+                variant="outlined"
+                required
+              />
 
               <Button
                 type="submit"
@@ -144,28 +157,14 @@ function Login() {
                 disabled={!isFormValid}
                 value="legacy"
               >
-                Login
+                Register
               </Button>
             </Formsy>
 
-            {/* <div className="my-24 flex items-center justify-center">
-              <Divider className="w-32" />
-              <span className="mx-8 font-bold">OR</span>
-              <Divider className="w-32" />
-            </div>
-
-            <Button variant="contained" color="secondary" size="small" className="w-192 mb-8">
-              Log in with Google
-            </Button>
-
-            <Button variant="contained" color="primary" size="small" className="w-192">
-              Log in with Facebook
-            </Button> */}
-
             <div className="flex flex-col items-center justify-center pt-32 pb-24">
-              <span className="font-medium">Don't have an account?</span>
-              <Link className="font-medium" to="/register">
-                Create an account
+              <span className="font-medium">Have an account?</span>
+              <Link className="font-medium" to="/login">
+                Go to Login
               </Link>
             </div>
           </CardContent>

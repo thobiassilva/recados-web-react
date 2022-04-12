@@ -1,10 +1,9 @@
 import React from 'react';
 import { authRoles } from 'app/auth';
 
-const Message = React.lazy(() => import('./show/Message'));
-const Messages = React.lazy(() => import('./list/Messages'));
+const Register = React.lazy(() => import('./Register'));
 
-const MessagesConfig = {
+const RegisterConfig = {
   settings: {
     layout: {
       config: {
@@ -16,7 +15,7 @@ const MessagesConfig = {
           position: 'left',
         },
         toolbar: {
-          display: true,
+          display: false,
           style: 'fixed',
           position: 'below',
         },
@@ -25,21 +24,22 @@ const MessagesConfig = {
           style: 'fixed',
           position: 'below',
         },
+        leftSidePanel: {
+          display: false,
+        },
+        rightSidePanel: {
+          display: false,
+        },
       },
     },
   },
-  auth: authRoles.admin,
+  auth: authRoles.onlyGuest,
   routes: [
     {
-      path: '/messages/:id',
-      element: <Message />,
-    },
-    {
-      path: '/messages',
-      exact: true,
-      element: <Messages />,
+      path: '/register',
+      element: <Register />,
     },
   ],
 };
 
-export default MessagesConfig;
+export default RegisterConfig;
