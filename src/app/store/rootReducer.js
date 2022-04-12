@@ -1,5 +1,7 @@
 import product from 'app/main/products/store/productSlice';
 import products from 'app/main/products/store/productsSlice';
+import message from 'app/main/messages/store/messageSlice';
+import messages from 'app/main/messages/store/messagesSlice';
 
 import { combineReducers } from '@reduxjs/toolkit';
 import auth from 'app/auth/store';
@@ -13,6 +15,8 @@ const createReducer = (asyncReducers) => (state, action) => {
     i18n,
     product,
     products,
+    message,
+    messages,
     ...asyncReducers,
   });
 

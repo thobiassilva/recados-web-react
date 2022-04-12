@@ -11,6 +11,7 @@ export default function makeServer({ environment = 'test' } = {}) {
       user: Model,
       products: Model,
       categories: Model,
+      messages: Model,
     },
 
     seeds(server) {
@@ -40,6 +41,34 @@ export default function makeServer({ environment = 'test' } = {}) {
         id: 1,
         title: 'Teste',
         access_token: 'kjhasdkasdhiuhkajsb987gxs7',
+      });
+
+      server.create('message', {
+        uid: '1',
+        title: 'Titulo da minha mensagem 1',
+        detail: 'Detalhe da minha mensagem 1',
+        user_uid: 'kjhasdkasdhiuhkajsb987gxs7',
+      });
+
+      server.create('message', {
+        uid: '2',
+        title: 'Titulo da minha mensagem 2',
+        detail: 'Detalhe da minha mensagem 2',
+        user_uid: 'kjhasdkasdhiuhkajsb987gxs7',
+      });
+
+      server.create('message', {
+        uid: '3',
+        title: 'Titulo da minha mensagem 3',
+        detail: 'Detalhe da minha mensagem 3',
+        user_uid: 'kjhasdkasdhiuhkajsb987gxs7',
+      });
+
+      server.create('message', {
+        uid: '4',
+        title: 'Titulo da minha mensagem 4',
+        detail: 'Detalhe da minha mensagem 4',
+        user_uid: 'kjhasdkasdhiuhkajsb987gxs7',
       });
     },
 
@@ -106,6 +135,57 @@ export default function makeServer({ environment = 'test' } = {}) {
           return { success: true, data: { product } };
         }
         return { success: false, data: 'PRODUCT NOT FOUD' };
+      });
+
+      this.post('/messages', (schema, request) => {
+        const attrs = JSON.parse(request.requestBody);
+
+        const result = schema.messages.create(attrs);
+
+        return {
+          success: true,
+          data: result,
+          message: 'Mensagem cadastrada com sucesso.',
+        };
+      });
+
+      this.get('/messages', (schema) => {
+        const result = schema.messages.all();
+        return { success: true, data: result.models };
+      });
+
+      this.get('/messages/:id', (schema, request) => {
+        const { id } = request.params;
+
+        const result = schema.messages.find(id);
+        if (result) {
+          return { success: true, data: result };
+        }
+        return { success: false, data: 'MESSAGE NOT FOUD' };
+      });
+
+      this.put('/messages/:id', (schema, request) => {
+        const newAttrs = JSON.parse(request.requestBody);
+        const { id } = request.params;
+        const message = schema.messages.find(id);
+
+        message.update(newAttrs);
+        if (message) {
+          return { success: true, data: message };
+        }
+        return { success: false, data: 'MESSAGE NOT FOUD' };
+      });
+
+      this.delete('/messages/:id', (schema, request) => {
+        const newAttrs = JSON.parse(request.requestBody);
+        const { id } = request.params;
+        const message = schema.messages.find(id);
+
+        message.delete(newAttrs);
+        if (message) {
+          return { success: true, data: message };
+        }
+        return { success: false, data: 'MESSAGE NOT FOUD' };
       });
 
       this.post('/categories', (schema, request) => {

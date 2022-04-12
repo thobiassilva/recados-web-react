@@ -89,15 +89,13 @@ function Login() {
               <TextFieldFormsy
                 className="mb-16"
                 type="text"
-                name="email"
-                label="E-mail"
-                validations="isEmail"
-                validationErrors="This is not a valid email"
+                name="username"
+                label="Username"
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
                       <Icon className="text-20" color="action">
-                        email
+                        username
                       </Icon>
                     </InputAdornment>
                   ),

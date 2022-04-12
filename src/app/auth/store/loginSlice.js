@@ -5,9 +5,9 @@ import Api from 'app/services/api';
 import { setUserData } from './userSlice';
 
 export const submitLogin =
-  ({ email, password, remember }) =>
+  ({ username, password, remember }) =>
   async (dispatch) => {
-    return Api.signInWithEmailAndPassword(email, password, remember)
+    return Api.signInWithEmailAndPassword(username, password, remember)
       .then((user) => {
         dispatch(setUserData(user));
 

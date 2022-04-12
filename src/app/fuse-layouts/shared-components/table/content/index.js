@@ -3,15 +3,7 @@ import { useState } from 'react';
 
 import _ from '@lodash';
 import FuseScrollbars from '@fuse/core/FuseScrollbars';
-import {
-  IconButton,
-  Table,
-  TableBody,
-  TableCell,
-  TablePagination,
-  TableRow,
-  Typography,
-} from '@mui/material/';
+import { IconButton, Table, TableBody, TableCell, TableRow, Typography } from '@mui/material/';
 
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
@@ -46,6 +38,7 @@ export default function TableContent({ action, columns, data }) {
   function handleChangeRowsPerPage(event) {
     setRowsPerPage(event.target.value);
   }
+  console.log(data);
 
   return (
     <div className="w-full flex flex-col">
@@ -73,47 +66,46 @@ export default function TableContent({ action, columns, data }) {
                 },
               ],
               [order.direction]
-            )
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((n) => {
-                return (
-                  <TableRow className="h-64" hover role="checkbox" tabIndex={-1} key={n.id}>
-                    <TableCell className="p-4 md:p-16" component="th" scope="left">
-                      <Typography className="font-bold" color="primary">
-                        {n[columns[0].id]}
-                      </Typography>
-                    </TableCell>
+            ).map((n, i) => {
+              return (
+                <TableRow className="h-64" hover role="checkbox" tabIndex={-1} key={n.id}>
+                  <TableCell className="p-4 md:p-16" component="th" scope="left">
+                    <Typography className="font-bold" color="primary">
+                      {/* {n[columns[0].id]} */}
+                      {i + 1}
+                    </Typography>
+                  </TableCell>
 
-                    {columns.map((item, index) => {
-                      if (index === 0) {
-                        return null;
-                      }
-                      return (
-                        <TableCell className="p-4 md:p-16" component="th" scope="row" key={item.id}>
-                          {item.id === 'enable'
-                            ? n.enable === true
-                              ? 'Ativo'
-                              : 'Inativo'
-                            : n[item.id]}
-                        </TableCell>
-                      );
-                    })}
-
-                    {action && (
-                      <TableCell className="p-4 md:p-16" component="th" scope="row" align="right">
-                        <IconButton aria-label="Detalhes" onClick={(e) => action(n)}>
-                          <ArrowForwardIosIcon />
-                        </IconButton>
+                  {columns.map((item, index) => {
+                    if (index === 0) {
+                      return null;
+                    }
+                    return (
+                      <TableCell className="p-4 md:p-16" component="th" scope="row" key={item.id}>
+                        {item.id === 'enable'
+                          ? n.enable === true
+                            ? 'Ativo'
+                            : 'Inativo'
+                          : n[item.id]}
                       </TableCell>
-                    )}
-                  </TableRow>
-                );
-              })}
+                    );
+                  })}
+
+                  {action && (
+                    <TableCell className="p-4 md:p-16" component="th" scope="row" align="right">
+                      <IconButton aria-label="Detalhes" onClick={(e) => action(n)}>
+                        <ArrowForwardIosIcon />
+                      </IconButton>
+                    </TableCell>
+                  )}
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </FuseScrollbars>
 
-      <TablePagination
+      {/* <TablePagination
         className="flex-shrink-0 border-t-1"
         component="div"
         count={data.length}
@@ -127,7 +119,7 @@ export default function TableContent({ action, columns, data }) {
         }}
         onChangePage={handleChangePage}
         onChangeRowsPerPage={handleChangeRowsPerPage}
-      />
+      /> */}
     </div>
   );
 }

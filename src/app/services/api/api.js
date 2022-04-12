@@ -16,7 +16,9 @@ class Api extends FuseUtils.EventEmitter {
   }
 
   setBaseUrl = () => {
-    axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+    // axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+    axios.defaults.baseURL = 'https://recados-api-thobiassilva.herokuapp.com';
+    axios.defaults.headers.common.Authorization = '00bf9a6c-d0b3-42db-aa38-bcc24bdc22a9';
   };
 
   setInterceptors = () => {
@@ -57,10 +59,12 @@ class Api extends FuseUtils.EventEmitter {
 
   createUser = (data) => {
     return new Promise((resolve, reject) => {
-      axios.post('/api/auth/register', data).then((response) => {
-        if (response.data.user) {
+      axios.post('/register', data).then((response) => {
+        if (response.data.data) {
           this.setSession(response.data.access_token);
-          resolve(response.data.user);
+          resolve({
+            uid: response.data.data,
+          });
         } else {
           reject(response.data.error);
         }
@@ -70,6 +74,7 @@ class Api extends FuseUtils.EventEmitter {
 
   doGet = async (url) => {
     try {
+      // this.init();
       const response = await axios.get(url);
 
       if (response.data.success === true) {
@@ -142,21 +147,31 @@ class Api extends FuseUtils.EventEmitter {
     }
   };
 
-  signInWithEmailAndPassword = (email, password, remember) => {
+  signInWithEmailAndPassword = (username, password, remember) => {
+    console.log(username);
+    console.log(password);
     return new Promise((resolve, reject) => {
       axios
         .post('/login', {
-          login: email,
+          login: username,
           password,
         })
         .then((response) => {
-          if (response.data.data.user) {
+          console.log(response.data);
+          if (response.data.data) {
             if (remember) {
-              this.setSaveSession(response.data.data.access_token);
+              this.setSaveSession(response.data.data);
             } else {
-              this.setSession(response.data.data.access_token);
+              this.setSession(response.data.data);
             }
-            resolve(response.data.data.user);
+            resolve({
+              uid: response.data.data,
+              role: ['admin'],
+              data: {
+                displayName: username,
+                email: username,
+              },
+            });
           } else {
             reject(response.data.error);
           }
@@ -193,20 +208,20 @@ class Api extends FuseUtils.EventEmitter {
 
   setSession = (access_token) => {
     if (access_token) {
-      sessionStorage.setItem('jwt_access_token', access_token);
-      axios.defaults.headers.common.Authorization = `Bearer ${access_token}`;
+      // sessionStorage.setItem('jwt_access_token', access_token);
+      axios.defaults.headers.common.Authorization = `${access_token}`;
     } else {
-      sessionStorage.removeItem('jwt_access_token');
+      // sessionStorage.removeItem('jwt_access_token');
       delete axios.defaults.headers.common.Authorization;
     }
   };
 
   setSaveSession = (access_token) => {
     if (access_token) {
-      localStorage.setItem('jwt_access_token', access_token);
-      axios.defaults.headers.common.Authorization = `Bearer ${access_token}`;
+      // localStorage.setItem('jwt_access_token', access_token);
+      axios.defaults.headers.common.Authorization = `${access_token}`;
     } else {
-      localStorage.removeItem('jwt_access_token');
+      // localStorage.removeItem('jwt_access_token');
       delete axios.defaults.headers.common.Authorization;
     }
   };
