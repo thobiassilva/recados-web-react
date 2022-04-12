@@ -1,5 +1,3 @@
-import product from 'app/main/products/store/productSlice';
-import products from 'app/main/products/store/productsSlice';
 import message from 'app/main/messages/store/messageSlice';
 import messages from 'app/main/messages/store/messagesSlice';
 
@@ -13,8 +11,6 @@ const createReducer = (asyncReducers) => (state, action) => {
     auth,
     fuse,
     i18n,
-    product,
-    products,
     message,
     messages,
     ...asyncReducers,

@@ -23,14 +23,6 @@ const navigationConfig = [
       //   icon: 'whatshot',
       //   url: '/example',
       // },
-      // {
-      //   id: 'product-component',
-      //   title: 'Products',
-      //   translate: 'Products',
-      //   type: 'item',
-      //   icon: 'store',
-      //   url: 'products',
-      // },
       {
         id: 'message-component',
         title: 'Mensagens',

@@ -2,12 +2,11 @@ import { Navigate } from 'react-router-dom';
 import FuseUtils from '@fuse/utils';
 import ExampleConfig from 'app/main/example/ExampleConfig';
 import LoginConfig from 'app/main/login/LoginConfig';
-import ProductsConfig from 'app/main/products/ProductsConfig';
 import FuseLoading from '@fuse/core/FuseLoading';
 import Error404Page from 'app/main/404/Error404Page';
 import MessagesConfig from 'app/main/messages/MessagesConfig';
 
-const routeConfigs = [ExampleConfig, ProductsConfig, LoginConfig, MessagesConfig];
+const routeConfigs = [ExampleConfig, LoginConfig, MessagesConfig];
 
 const routes = [
   // if you want to make whole app auth protected by default change defaultAuth for example:
