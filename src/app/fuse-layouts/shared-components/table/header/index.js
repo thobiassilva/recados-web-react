@@ -17,7 +17,7 @@ function TableHeadComponent(props) {
               className="p-4 md:p-16"
               key={column.id}
               align={column.align}
-              padding={column.disablePadding ? 'none' : 'default'}
+              padding={column.disablePadding ? 'none' : 'normal'}
               sortDirection={props?.order?.id === column?.id ? props?.order?.direction : false}
             >
               {column.sort ? (
