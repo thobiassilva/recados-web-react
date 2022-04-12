@@ -148,8 +148,6 @@ class Api extends FuseUtils.EventEmitter {
   };
 
   signInWithEmailAndPassword = (username, password, remember) => {
-    console.log(username);
-    console.log(password);
     return new Promise((resolve, reject) => {
       axios
         .post('/login', {
@@ -157,7 +155,6 @@ class Api extends FuseUtils.EventEmitter {
           password,
         })
         .then((response) => {
-          console.log(response.data);
           if (response.data.data) {
             if (remember) {
               this.setSaveSession(response.data.data);
