@@ -18,7 +18,7 @@ class Api extends FuseUtils.EventEmitter {
   setBaseUrl = () => {
     // axios.defaults.baseURL = process.env.REACT_APP_API_URL;
     axios.defaults.baseURL = 'https://recados-api-thobiassilva.herokuapp.com';
-    axios.defaults.headers.common.Authorization = '00bf9a6c-d0b3-42db-aa38-bcc24bdc22a9';
+    // axios.defaults.headers.common.Authorization = '00bf9a6c-d0b3-42db-aa38-bcc24bdc22a9';
   };
 
   setInterceptors = () => {
