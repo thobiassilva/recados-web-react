@@ -57,13 +57,7 @@ export default function Products() {
   useEffect(() => {
     if (messagesRedux) {
       setLoading(false);
-      if (messagesRedux.length) {
-        // const parseProducts = messagesRedux.map((item) => {
-        //   return item;
-        // });
-
-        setData(messagesRedux);
-      }
+      setData(messagesRedux);
     }
   }, [messagesRedux]);
 
